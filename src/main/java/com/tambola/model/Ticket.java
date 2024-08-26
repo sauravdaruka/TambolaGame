@@ -8,17 +8,23 @@ public class Ticket {
     public Ticket(List<List<Integer>> numbers) {
         this.ticketNumbers = new ArrayList<>();
         numbers.forEach(row -> {
-            Set<Integer> rowSet = new HashSet<>(row);
+            Set<Integer> rowSet = new HashSet<>();
+            row.stream().filter(Objects::nonNull).forEach(rowSet::add);
             this.ticketNumbers.add(rowSet);
         });
     }
 
+    public Set<Integer> getRow(int index) {
+        return new HashSet<>(ticketNumbers.get(index));
+    }
+
     public List<Set<Integer>> getTicketNumbers() {
         List<Set<Integer>> fetchNumbers = new ArrayList<>();
-        this.ticketNumbers.forEach(row -> {
-            Set<Integer> rowSet = new HashSet<>(row);
-            fetchNumbers.add(rowSet);
-        });
+        ticketNumbers.forEach(row -> fetchNumbers.add(new HashSet<>(row)));
         return fetchNumbers;
+    }
+
+    public boolean isNumberPresent(int number) {
+        return ticketNumbers.stream().anyMatch(row -> row.contains(number));
     }
 }

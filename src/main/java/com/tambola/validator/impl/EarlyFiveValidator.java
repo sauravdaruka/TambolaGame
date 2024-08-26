@@ -31,6 +31,6 @@ public class EarlyFiveValidator implements ClaimValidator {
                 isLastAnnouncedNumberPresent.set(false);
         });
         boolean isValidated = countCrossedNumbers.get() == ApplicationConstants.COLUMN_SIZE && isLastAnnouncedNumberPresent.get();
-        return ClaimStatus.getClaimStatusByIsAccepted(isValidated);
+        return ClaimStatus.isAccepted(isValidated);
     }
 }

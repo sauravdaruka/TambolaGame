@@ -3,6 +3,7 @@ package com.tambola.validator.impl;
 import com.tambola.enums.ClaimStatus;
 import com.tambola.enums.ClaimType;
 import com.tambola.manager.TambolaManager;
+import com.tambola.model.Ticket;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import java.util.List;
 
 class EarlyFiveValidatorTest {
     private TambolaManager tambolaManager;
+    private Ticket ticket;
 
     @BeforeEach
     public void setup() {
@@ -21,7 +23,8 @@ class EarlyFiveValidatorTest {
                 Arrays.asList(7, null, 23, 38, null, 52, null, null, 80),
                 Arrays.asList(9, null, 25, null, null, 56, 64, null, 83)
         );
-        tambolaManager.initializeTicket(numbers);
+        ticket = new Ticket(numbers);
+        tambolaManager.setTicket(ticket);
     }
 
 

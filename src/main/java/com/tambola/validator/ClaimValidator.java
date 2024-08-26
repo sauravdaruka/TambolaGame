@@ -9,3 +9,4 @@ import java.util.List;
 public interface ClaimValidator {
     ClaimStatus validateClaim(Ticket ticket, List<Integer> announcedNumbers);
 }
+

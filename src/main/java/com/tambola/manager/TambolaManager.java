@@ -7,11 +7,11 @@ import com.tambola.model.Ticket;
 import com.tambola.validator.ClaimValidator;
 
 import java.util.List;
-
 public class TambolaManager {
     private static TambolaManager tambolaManager;
     private Ticket ticket;
     private final ClaimValidatorFactory claimValidatorFactory;
+
     private TambolaManager() {
         claimValidatorFactory = new ClaimValidatorFactory();
     }
@@ -25,11 +25,17 @@ public class TambolaManager {
         }
         return tambolaManager;
     }
-    public void initializeTicket(List<List<Integer>> numbers) {
-        ticket = new Ticket(numbers);
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
     }
+
     public ClaimStatus validateClaim(ClaimType claimType, List<Integer> announcedNumbers) {
-        ClaimValidator claimValidator = this.claimValidatorFactory.getClaimType(claimType);
+        if (ticket == null) {
+            throw new IllegalStateException("Ticket is not initialized.");
+        }
+        ClaimValidator claimValidator = ClaimValidatorFactory.getClaimType(claimType);
         return claimValidator.validateClaim(ticket, announcedNumbers);
     }
 }
+

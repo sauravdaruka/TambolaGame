@@ -27,6 +27,6 @@ public class FullHouseValidator implements ClaimValidator {
             });
         });
         boolean isValidated = (countCrossedNumbers.get() == totalTicketItems) && isLastAnnouncedNumberPresent.get();
-        return ClaimStatus.getClaimStatusByIsAccepted(isValidated);
+        return ClaimStatus.isAccepted(isValidated);
     }
 }
