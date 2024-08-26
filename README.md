@@ -1,18 +1,24 @@
-# Tambola Game
+# Tambola Game Validator
 
-## Assumptions
-- The ticket is represented as a 3x5 grid.
-- Claims are validated based on the announced numbers.
+## Overview
 
-## Setup
-1. Add the necessary dependencies for build tool.
-2. Instantiate `TambolaManager` and set up the ticket using `setTicket()`.
+This project provides a set of validators for the Tambola (Housie) game, focusing on validating various types of claims, including Full House claims. The validators check if the claims meet the required conditions based on the announced numbers and the ticket's numbers.
 
-## Usage
-1. Initialize the ticket:
-   ```java
-   TambolaManager manager = TambolaManager.getTambolaManager();
-   manager.setTicket(new Ticket(numbers));
+## Project Structure
 
-2. ClaimStatus status = manager.validateClaim(ClaimType.TOP_LINE, announcedNumbers);
+- **`FullHouseValidator`**: Validates if a ticket's claim is a full house by checking if all numbers on the ticket are announced and if the last announced number is present on the ticket. Utilizes individual line validators for top, middle, and bottom lines.
 
+
+- **`ClaimValidator`**: An interface that defines the contract for validating claims.
+
+
+- **`ClaimValidatorFactory`**: A factory class to obtain instances of line validators (TopLine, MiddleLine, BottomLine) based on the claim type.
+
+
+- **`Ticket`**: Represents a Tambola ticket containing a 3x9 matrix of numbers.
+
+
+- **`ClaimStatus`**: Represents the status of a claim (Accepted or Rejected).
+
+
+- **`TambolaManager`**: Manages the game state and performs claim validations.
